@@ -1,0 +1,45 @@
+name: Validate versions.json
+
+on:
+  pull_request:
+    paths:
+      - 'versions.json'
+      - 'validate.py'
+      - '.github/workflows/validate.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'versions.json'
+      - 'validate.py'
+
+jobs:
+  validate:
+    name: Validate Package Versions
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Validate versions.json
+        run: |
+          python3 validate.py
+          
+      - name: Check JSON formatting
+        run: |
+          python3 -m json.tool versions.json > /dev/null
+          echo "✓ versions.json is valid JSON"
+      
+      - name: Display package list
+        if: success()
+        run: |
+          echo "Current packages:"
+          python3 get_version.py list
