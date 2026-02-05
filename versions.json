@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LBNL-ETA Package Versions",
+  "description": "Centralized version management for THERM and WINDOW projects",
+  "lastUpdated": "2026-02-05",
+  "packages": {
+    "testing": {
+      "googletest": {
+        "version": "v1.14.0",
+        "type": "git_tag",
+        "repository": "https://github.com/google/googletest.git",
+        "description": "Google Testing and Mocking Framework",
+        "usedBy": [
+          "Windows-CalcEngine",
+          "HygroThermFEM",
+          "KeffCavity"
+        ]
+      }
+    },
+    "libraries": {
+      "eigen": {
+        "version": "5.0.1",
+        "type": "git_tag",
+        "repository": "https://gitlab.com/libeigen/eigen.git",
+        "description": "C++ template library for linear algebra",
+        "usedBy": [
+          "HygroThermFEM"
+        ]
+      }
+    },
+    "internal": {
+      "Windows-CalcEngine": {
+        "version": "Version_1.0.66",
+        "type": "git_tag",
+        "repository": "https://github.com/LBNL-ETA/Windows-CalcEngine.git",
+        "description": "Thermal and optical routines for modeling properties of window and shading systems",
+        "usedBy": [
+          "KeffCavity"
+        ]
+      },
+      "KeffCavity": {
+        "version": "Version_1.0.31",
+        "type": "git_tag",
+        "repository": "https://github.com/LBNL-ETA/KeffCavity.git",
+        "description": "Cavity effective conductance calculations",
+        "usedBy": [
+          "HygroThermFEM"
+        ]
+      },
+      "HygroThermFEM": {
+        "version": "Version_1.0.51",
+        "type": "git_tag",
+        "repository": "https://github.com/LBNL-ETA/HygroThermFEM.git",
+        "description": "Hygrothermal finite element modeling",
+        "usedBy": [
+          "THERM"
+        ]
+      }
+    },
+    "build": {
+      "cmake": {
+        "minimum_version": "3.12",
+        "recommended_version": "3.20+",
+        "description": "Build system generator",
+        "notes": "Windows-CalcEngine uses 3.5, KeffCavity uses 3.8, HygroThermFEM uses 3.12. Use 3.12 or higher for all projects."
+      },
+      "cpp_standard": {
+        "version": "20",
+        "description": "C++ language standard",
+        "notes": "All projects use C++20"
+      }
+    }
+  }
+}
